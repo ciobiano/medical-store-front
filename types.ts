@@ -1,4 +1,4 @@
-export interface BillBoard {
+export interface Billboard {
     id: string;
     label: string;
     imageUrl: string;
@@ -7,6 +7,6 @@ export interface BillBoard {
 export interface Category {
     id: string;
     name: string;
-    billBoards: BillBoard;
+    billBoards: Billboard;
 }
 
