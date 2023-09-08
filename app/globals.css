@@ -33,7 +33,14 @@
     --ring: 222.2 84% 4.9%;
  
     --radius: 0.5rem;
+
+        --default: #ccc;
+          --default-1: #111827;
+          --default-2: #243c42;
+          --default-3: #027575;
+          --default-4: #0A6B6A;
   }
+  
  
   .dark {
     --background: 222.2 84% 4.9%;
