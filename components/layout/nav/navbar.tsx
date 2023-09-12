@@ -12,6 +12,10 @@ const SITE_NAME = process.env.SITE_NAME;
 export default async function Navbar() {
 	const categories = await getCategories();
 
+	const shuffle = (array: Category[]) => array.sort(() => Math.random() - 0.5);
+	const randomFourCategories = shuffle([...categories]).slice(0, 2);
+
+
 	return (
 		<nav className="relative flex items-center justify-between p-4 lg:px-6">
 			<div className="block flex-none md:hidden">
@@ -30,10 +34,18 @@ export default async function Navbar() {
 					</Link>
 					{categories.length ? (
 						<ul className="hidden gap-6 text-sm md:flex md:items-center">
-							{categories.map((item: Category) => (
+							<li className="flex ">
+								<Link
+									href={"/search"}
+									className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
+								>
+									All
+								</Link>
+							</li>
+							{randomFourCategories.map((item: Category) => (
 								<li key={item.name}>
 									<Link
-										href={"/"}
+										href={`/search/${item.id}`}
 										className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300"
 									>
 										{item.name}
@@ -48,8 +60,7 @@ export default async function Navbar() {
 				</div>
 				<div className="flex justify-end md:w-1/3">
 					<GiShoppingBag />
-					</div>
-
+				</div>
 			</div>
 		</nav>
 	);

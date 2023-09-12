@@ -4,21 +4,22 @@ import qs from "query-string";
 
 const URL = `${process.env.NEXT_PUBLIC_API_URL}/inventories`;
 
-interface Query {
+export interface Query {
 	categoryId?: string;
 	manufacturerId?: string;
 	sizeId?: string;
 	isFeatured?: string;
+	sortKey?: string; 
+	reverse?: boolean;
 }
 
 const getProducts = async (query: Query): Promise<Inventory[]> => {
 	const url = qs.stringifyUrl({
 		url: URL,
 		query: {
-			manufacturerId: query.manufacturerId,
-			sizeId: query.sizeId,
-			categoryId: query.categoryId,
-			isFeatured: query.isFeatured,
+			...query, // spread the existing query
+			sortKey: query.sortKey,
+			reverse: query.reverse,
 		},
 	});
 	const res = await fetch(url);

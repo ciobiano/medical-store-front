@@ -28,7 +28,7 @@ const HomePage = async () => {
 
 	return (
 		<Container>
-			<div className="space-y-10 pb-10 mt-6">
+			<div className="space-y-20 pb-10 mt-6">
 				<Billboard
 					data={billboard}
 					variant="type2"
@@ -38,7 +38,7 @@ const HomePage = async () => {
 				<div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
 					<GridRow />
 				</div>
-				<div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8">
+				<div className="flex flex-col gap-y-8 px-4 sm:px-6 lg:px-8 ">
 					<header className="uppercase space-y-4 md:text-lg font-semibold border-b border-gray-600 w-full text-[--default-2] ">
 						{category.name}
 					</header>
