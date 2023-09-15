@@ -6,7 +6,6 @@ import Search from "./search";
 import { GiShoppingBag } from "react-icons/gi";
 import MobileMenu from "./mobile-nav";
 
-
 const SITE_NAME = process.env.SITE_NAME;
 
 export default async function Navbar() {
@@ -14,7 +13,6 @@ export default async function Navbar() {
 
 	const shuffle = (array: Category[]) => array.sort(() => Math.random() - 0.5);
 	const randomFourCategories = shuffle([...categories]).slice(0, 2);
-
 
 	return (
 		<nav className="relative flex items-center justify-between p-4 lg:px-6">

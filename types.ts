@@ -13,6 +13,7 @@ export interface Category {
 export interface Inventory {
 	id: string;
 	category: Category;
+	stock: number;
 	name: string;
 	price: string;
 	isFeatured: boolean;
@@ -20,6 +21,7 @@ export interface Inventory {
     description: string;
 	manufacturer: Manufacturer;
 	images: Image[];
+
 }
 export interface Image {
 	id: string;
