@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Suspense } from "react";
 import FooterMenu from "./footer-menu";
 import getCategories from "@/actions/get-categories";
+import LogoIconLarge from "../icons/logo-large";
 
 const { COMPANY_NAME, SITE_NAME } = process.env;
 
@@ -11,23 +12,18 @@ export default async function Footer() {
 	const skeleton =
 		"w-full h-6 animate-pulse rounded bg-neutral-200 dark:bg-neutral-700";
 
-    const categories = await getCategories();
-    
-
+	const categories = await getCategories();
 
 	const copyrightName = COMPANY_NAME || SITE_NAME || "";
 	return (
 		<footer className="text-sm text-neutral-500 dark:text-neutral-400">
-			<div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm dark:border-neutral-700 md:flex-row md:gap-12 md:px-4 min-[1320px]:px-0">
-				<div>
-					<Link
-						className="flex items-center gap-2 text-black dark:text-white md:pt-1"
-						href="/"
-					>
-						{/* <LogoSquare size="sm" /> */}
-						<span className="uppercase">{SITE_NAME}</span>
+			<div className="mx-auto flex w-full max-w-7xl flex-col gap-6 border-t border-neutral-200 px-6 py-12 text-sm dark:border-neutral-700 md:flex-row md:gap-4 md:px-4 min-[1320px]:px-0">
+				
+					<Link className=" text-black item-center flex   dark:text-white" href="/">
+						<LogoIconLarge className="item-center my-auto mt-[-4] " />
 					</Link>
-				</div>
+				
+
 				<Suspense
 					fallback={
 						<div className="flex h-[188px] w-[200px] flex-col gap-2">

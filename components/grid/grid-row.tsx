@@ -34,11 +34,24 @@ const GridRow: React.FC = () => {
 		},
 	];
 
+	 // Purposefully duplicating products to make the carousel loop and not run out of products on wide screens.
+  const carouselAdvice = [...adviceData, ...adviceData, ...adviceData];
+
+
 	return (
-		<div className="flex flex-row justify-around">
-			{adviceData.map((advice, index) => (
-				<GridDisplay key={index} {...advice} />
-			))}
+		<div className="w-full overflow-x-auto pb-6 pt-1">
+			<ul className="flex animate-carousel gap-4">
+
+				{carouselAdvice.map((advice, index) => (
+					<li
+            key={index}
+            className="relative aspect-square h-[30vh] max-h-[275px] w-2/3 max-w-[475px] flex-none md:w-1/3"
+          >
+
+			  <GridDisplay key={index} {...advice} />
+		  </li>
+				))}
+			</ul>
 		</div>
 	);
 };

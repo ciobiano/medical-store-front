@@ -14,14 +14,14 @@ export interface Inventory {
 	id: string;
 	category: Category;
 	stock: number;
+	quantity?: number;
 	name: string;
 	price: string;
 	isFeatured: boolean;
 	size: Size;
-    description: string;
+	description: string;
 	manufacturer: Manufacturer;
 	images: Image[];
-
 }
 export interface Image {
 	id: string;
@@ -40,3 +40,4 @@ export interface Manufacturer {
 	name: string;
 
 }
+

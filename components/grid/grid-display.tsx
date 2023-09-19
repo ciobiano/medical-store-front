@@ -15,7 +15,7 @@ const GridDisplay: React.FC<GridDisplayProps> = ({
 	imageUrl,
 }) => {
 	return (
-		<div className="bg-white rounded-lg shadow-lg z-10 w-1/4 m-2">
+		<div className="bg-white rounded-lg shadow-lg z-10 w-full  md:w-5/6 m-2">
 			<Image
 				src={imageUrl}
 				alt={title}
