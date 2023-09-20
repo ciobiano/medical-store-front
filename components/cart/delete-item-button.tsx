@@ -1,6 +1,6 @@
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import LoadingDots from "@/components/load-dots";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 import clsx from "clsx";
 import useCart from "@/hooks/use-cart"; // Import your useCart hook
 import { useTransition } from "react";
@@ -23,7 +23,7 @@ export default function DeleteItemButton({ item }: DeleteItemButtonProps) {
 			removeItem(item.id);
 
 			// Refresh or navigate
-			router.push("/cart"); // Navigate to cart page or refresh
+			router.refresh(); // Navigate to cart page or refresh
 		});
 	};
 

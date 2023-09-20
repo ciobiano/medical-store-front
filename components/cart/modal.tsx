@@ -1,3 +1,5 @@
+"use client";
+
 import { Dialog, Transition } from "@headlessui/react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import { useRouter } from "next/router";
@@ -11,13 +13,12 @@ import Image from "next/image";
 import OpenCart from "./open-cart";
 import Price from "../price";
 
-
 interface CartModalProps {
 	cartItems: Inventory[];
 }
 export default function CartModal({ cartItems }: CartModalProps) {
-	const [isOpen, setIsOpen] = useState(false);
 	const quantityRef = useRef(0);
+	const [isOpen, setIsOpen] = useState(false);
 
 	const totalQuantity = cartItems.reduce(
 		(acc, item) => acc + (item.quantity || 0),
@@ -72,7 +73,7 @@ export default function CartModal({ cartItems }: CartModalProps) {
 						leaveFrom="translate-x-0"
 						leaveTo="translate-x-full"
 					>
-						<Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col">
+						<Dialog.Panel className="fixed bottom-0 right-0 top-0 flex h-full w-full flex-col border-l border-neutral-200 bg-white/80 p-6 text-black backdrop-blur-xl dark:border-neutral-700 dark:bg-black/80 dark:text-white md:w-[390px]">
 							<div className="flex items-center justify-between">
 								<p className="text-lg font-semibold">My Cart</p>
 								<button aria-label="Close cart" onClick={closeCart}>
@@ -110,6 +111,7 @@ export default function CartModal({ cartItems }: CartModalProps) {
 																<Image
 																	className="h-full w-full object-cover"
 																	alt={item.name}
+																	fill
 																	src={
 																		item.images[0]?.url || "/default-image.jpg"
 																	}
@@ -186,7 +188,7 @@ export default function CartModal({ cartItems }: CartModalProps) {
 									</div>
 									<a
 										href={"/checkout"}
-										className="block w-full rounded-full bg-blue-600 p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
+										className="block w-full rounded-full bg-[--default-3] p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
 									>
 										Proceed to Checkout
 									</a>

@@ -5,6 +5,9 @@ import Link from "next/link";
 import Search from "./search";
 import { GiShoppingBag } from "react-icons/gi";
 import MobileMenu from "./mobile-nav";
+import { Suspense } from "react";
+import OpenCart from "@/components/cart/open-cart";
+import Cart from "@/components/cart";
 
 const SITE_NAME = process.env.SITE_NAME;
 
@@ -57,7 +60,9 @@ export default async function Navbar() {
 					<Search />
 				</div>
 				<div className="flex justify-end md:w-1/3">
-					<GiShoppingBag />
+					<Suspense fallback={<OpenCart />}>
+						<Cart />
+					</Suspense>
 				</div>
 			</div>
 		</nav>

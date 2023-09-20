@@ -1,3 +1,5 @@
+'use client'
+
 import CartModal from "./modal";
 import useCart from "@/hooks/use-cart"; // Import your useCart hook
 

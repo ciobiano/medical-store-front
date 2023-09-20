@@ -13,6 +13,7 @@ export interface Category {
 export interface Inventory {
 	id: string;
 	category: Category;
+	isOutOfStock: boolean;
 	stock: number;
 	quantity?: number;
 	name: string;
