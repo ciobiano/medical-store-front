@@ -140,7 +140,7 @@ export default function CartModal({ cartItems }: CartModalProps) {
 																{item.quantity ?? 0}
 															</span>
 															<div className="text-right text-sm">
-																Subtotal: $
+																Subtotal: ₦{" "}
 																{parseFloat(item.price) * (item.quantity ?? 0)}
 															</div>
 															<div className="ml-auto flex h-9 flex-row items-center rounded-full border border-neutral-200 dark:border-neutral-700">

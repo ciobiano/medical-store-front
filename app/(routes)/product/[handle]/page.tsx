@@ -21,22 +21,10 @@ export async function generateMetadata({
 
 	if (!product) return notFound();
 
-	const { url,  } = product.images[0] || {};
-
 	return {
 		title: product.name,
 		description: product.description,
-		openGraph: url
-			? {
-					images: [
-						{
-							url,
-							alt: product.name,
-                            
-						},
-					],
-			  }
-			: null,
+		
 	};
 }
 
@@ -46,6 +34,7 @@ export default async function ProductPage({
 	params: { handle: string };
 }) {
 	const product = await getProduct(params.handle);
+
 
 	if (!product) return notFound();
 	const productJsonLd = {

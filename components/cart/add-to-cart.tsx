@@ -34,7 +34,7 @@ export function AddToCart({ inventory, availableForSale }: AddToCartProps) {
 	return (
 		<button
 			aria-label="Add item to cart"
-			disabled={!availableForSale || !inventory.id}
+			disabled={isPending || !availableForSale || !inventory.id}
 			title={!availableForSale ? "Out of stock" : undefined}
 			onClick={handleAddToCart}
 			className={clsx(
