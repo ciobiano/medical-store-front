@@ -1,7 +1,7 @@
 import { Inventory } from "@/types"; // Replace with your actual Inventory type import
 import toast from "react-hot-toast";
 import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
+import {  persist } from "zustand/middleware";
 
 type CartState = {
 	items: Inventory[];
@@ -10,6 +10,38 @@ type CartState = {
 	updateItemQuantity: (id: string, newQuantity: number) => void;
 	clearCart: () => void;
 };
+
+
+
+// Guarded localStorage access function
+function createJSONStorage() {
+	const isBrowser = typeof window !== "undefined";
+
+	if (!isBrowser) {
+		// Provide a fallback if not in a browser environment
+		return {
+			getItem: () => null,  // Fallback methods
+			setItem: () => {},
+			 removeItem: () => {}
+		};
+	}
+
+	// If in a browser environment, return actual localStorage methods
+	return {
+		getItem: (key: string) => {
+			const item = localStorage.getItem(key);
+			return Promise.resolve(item ? JSON.parse(item) : null);
+		},
+		setItem: (key: string, value: any) => {
+			localStorage.setItem(key, JSON.stringify(value));
+		},
+		removeItem: (key: string) => {
+			localStorage.removeItem(key);
+		},
+	};
+}
+
+const storage = createJSONStorage();
 
 const useCart = create(
 	persist<CartState>(
@@ -28,7 +60,7 @@ const useCart = create(
 					if (existingItem.stock > 0) {
 						// Update the quantity of the existing item
 						existingItem.stock -= 1; // Reduce stock by 1
-						 existingItem.quantity = (existingItem.quantity || 0) + 1; // Increase quantity in cart by 1
+						existingItem.quantity = (existingItem.quantity || 0) + 1; // Increase quantity in cart by 1
 
 						currentItems[existingItemIndex] = existingItem; // Update the item in the cart
 						set({ items: [...currentItems] });
@@ -64,8 +96,9 @@ const useCart = create(
 			clearCart: () => set({ items: [] }),
 		}),
 		{
-			name: "cart-storage", // This is the key under which your state will be stored in localStorage
-			storage: createJSONStorage(() => localStorage),
+			name: "cart-storage", // This is the key under which your state will be stored
+			storage: storage,
+			 
 		}
 	)
 );

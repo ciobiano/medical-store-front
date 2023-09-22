@@ -3,7 +3,6 @@ import LogoSquare from "@/components/logo-square";
 import { Category } from "@/types";
 import Link from "next/link";
 import Search from "./search";
-import { GiShoppingBag } from "react-icons/gi";
 import MobileMenu from "./mobile-nav";
 import { Suspense } from "react";
 import OpenCart from "@/components/cart/open-cart";

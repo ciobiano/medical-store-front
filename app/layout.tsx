@@ -26,10 +26,12 @@ export default function RootLayout({
 			<body className={inter.className}>
 				<ToastProvider />
 				<Navbar />
+				<Suspense>
 
 				<main>{children}</main>
-
 				<Footer />
+				</Suspense>
+
 			</body>
 		</html>
 	);

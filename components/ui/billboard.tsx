@@ -4,7 +4,7 @@ import Link from "next/link";
 import { GoChevronRight } from "react-icons/go";
 
 interface BillboardProps {
-	data: BillboardType; // <- Allow null
+	data: BillboardType; 
 	variant?: "type1" | "type2";
 	description?: string;
 }
@@ -34,9 +34,9 @@ const Billboard: React.FC<BillboardProps> = ({
 			<div className="mt-6">
 				<div className="p-4 rounded-xl flex flex-row gap-x-4  overflow-hidden md:items-center">
 					<div className="flex-grow flex-shrink w-full min-w-[200px] md:items-center space-y-2 md:space-y-4 text-[--default-2]">
-						<header className="text-xs sm:text-sm font-semibold items-start uppercase">
+						<h2 className="text-xs sm:text-sm font-semibold items-start uppercase">
 							Health condition
-						</header>
+						</h2>
 						<h1 className="text-lg sm:text-xl md:text-4xl font-bold ">
 							{data?.label}
 						</h1>
@@ -54,7 +54,7 @@ const Billboard: React.FC<BillboardProps> = ({
 							alt="billboard"
 							width={500}
 							height={500}
-							layout="responsive"
+							
 						/>
 					</div>
 				</div>

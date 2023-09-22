@@ -16,7 +16,7 @@ const LogoIconLarge: React.FC<LogoIconProps> = ({
 		aria-label={`${siteName} logo`}
 		xmlns="http://www.w3.org/2000/svg"
 		viewBox="0 0 417.074 417.074"
-		className={clsx("h-48 w-48", className)}
+		className={clsx("h-24 w-24", className)}
 		{...props}
 	>
 		

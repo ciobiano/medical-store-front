@@ -2,7 +2,6 @@
 
 import { Dialog, Transition } from "@headlessui/react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
-import { useRouter } from "next/router";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
 import { Inventory } from "@/types"; // Import your Inventory type
@@ -16,18 +15,20 @@ import Price from "../price";
 interface CartModalProps {
 	cartItems: Inventory[];
 }
-export default function CartModal({ cartItems }: CartModalProps) {
-	const quantityRef = useRef(0);
+export default function CartModal({ cartItems = [] }: CartModalProps) {
+	
+		const totalQuantity = cartItems?.reduce(
+			(acc, item) => acc + (item.quantity || 0),
+			0
+		);
+		const cartTotal = cartItems?.reduce(
+			(total, item) => total + parseFloat(item.price) * (item.quantity ?? 1),
+			0
+		);
+	const quantityRef = useRef(totalQuantity);
 	const [isOpen, setIsOpen] = useState(false);
-
-	const totalQuantity = cartItems.reduce(
-		(acc, item) => acc + (item.quantity || 0),
-		0
-	);
-	const cartTotal = cartItems.reduce(
-		(total, item) => total + parseFloat(item.price) * (item.quantity ?? 1),
-		0
-	);
+	const openCart = () => setIsOpen(true);
+	const closeCart = () => setIsOpen(false);
 	// Assuming a tax rate of 10%
 	const taxAmount = cartTotal * 0.1;
 
@@ -41,10 +42,9 @@ export default function CartModal({ cartItems }: CartModalProps) {
 			}
 			quantityRef.current = totalQuantity;
 		}
-	}, [isOpen, totalQuantity]);
+	}, [isOpen, totalQuantity, quantityRef]);
 
-	const openCart = () => setIsOpen(true);
-	const closeCart = () => setIsOpen(false);
+	
 
 	return (
 		<>
@@ -107,7 +107,7 @@ export default function CartModal({ cartItems }: CartModalProps) {
 															className="z-30 flex flex-row space-x-4"
 														>
 															<div className="relative h-16 w-16 cursor-pointer overflow-hidden rounded-md border border-neutral-300 bg-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800">
-																{/* Replace with your actual image URL and alt text */}
+																
 																<Image
 																	className="h-full w-full object-cover"
 																	alt={item.name}
