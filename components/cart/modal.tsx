@@ -4,6 +4,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { ShoppingCartIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
 import { Fragment, useEffect, useRef, useState } from "react";
+import axios from "axios";
 import { Inventory } from "@/types"; // Import your Inventory type
 import DeleteItemButton from "./delete-item-button";
 import EditItemQuantityButton from "./edit-item-quantity";
@@ -11,29 +12,62 @@ import CloseCart from "./close-cart";
 import Image from "next/image";
 import OpenCart from "./open-cart";
 import Price from "../price";
+import { useSearchParams } from "next/navigation";
+import toast from "react-hot-toast";
+import useCart from "@/hooks/use-cart";
 
 interface CartModalProps {
 	cartItems: Inventory[];
 }
 export default function CartModal({ cartItems = [] }: CartModalProps) {
-	
-		const totalQuantity = cartItems?.reduce(
-			(acc, item) => acc + (item.quantity || 0),
-			0
-		);
-		const cartTotal = cartItems?.reduce(
-			(total, item) => total + parseFloat(item.price) * (item.quantity ?? 1),
-			0
-		);
+	const totalQuantity = cartItems?.reduce(
+		(acc, item) => acc + (item.quantity || 0),
+		0
+	);
+	const cartTotal = cartItems?.reduce(
+		(total, item) => total + parseFloat(item.price) * (item.quantity ?? 1),
+		0
+	);
 	const quantityRef = useRef(totalQuantity);
+	const searchParams = useSearchParams();
+	const [isMounted, setIsMounted] = useState(false);
 	const [isOpen, setIsOpen] = useState(false);
 	const openCart = () => setIsOpen(true);
 	const closeCart = () => setIsOpen(false);
+	const clearCart = useCart((state) => state.clearCart);
 	// Assuming a tax rate of 10%
 	const taxAmount = cartTotal * 0.1;
 
 	// Final total including tax
 	const finalTotal = cartTotal + taxAmount;
+	const onCheckOut = async () => {
+		const payload = {
+			items: cartItems.map((item: Inventory) => ({
+				id: item.id,
+				quantity: item.quantity,
+			})),
+		};
+		
+		const response = await axios.post(
+			`${process.env.NEXT_PUBLIC_API_URL}/checkout`,
+			payload
+		);
+		window.location.href = response.data.url;
+	};
+
+	useEffect(() => {
+		setIsMounted(true);
+	}, []);
+
+	useEffect(() => {
+		if (searchParams.get("success")) {
+			toast.success("completed");
+			clearCart();
+		}
+		if (searchParams.get("canceled")) {
+			toast.error("canceled");
+		}
+	}, [searchParams, clearCart]);
 
 	useEffect(() => {
 		if (totalQuantity !== quantityRef.current) {
@@ -44,7 +78,7 @@ export default function CartModal({ cartItems = [] }: CartModalProps) {
 		}
 	}, [isOpen, totalQuantity, quantityRef]);
 
-	
+	if (!isMounted) return null;
 
 	return (
 		<>
@@ -107,7 +141,6 @@ export default function CartModal({ cartItems = [] }: CartModalProps) {
 															className="z-30 flex flex-row space-x-4"
 														>
 															<div className="relative h-16 w-16 cursor-pointer overflow-hidden rounded-md border border-neutral-300 bg-neutral-300 dark:border-neutral-700 dark:bg-neutral-900 dark:hover:bg-neutral-800">
-																
 																<Image
 																	className="h-full w-full object-cover"
 																	alt={item.name}
@@ -126,13 +159,13 @@ export default function CartModal({ cartItems = [] }: CartModalProps) {
 																	{item.category.name}{" "}
 																	{/* Assuming category has a name property */}
 																</p>
-																<p className="text-sm text-neutral-500 dark:text-neutral-400">
+																<div className="text-sm text-neutral-500 dark:text-neutral-400">
 																	<Price
 																		className="flex justify-end space-y-2 text-right text-sm"
 																		amount={item.price}
 																		currencyCode={"NGN"}
 																	/>
-																</p>
+																</div>
 															</div>
 														</Link>
 														<div className="flex h-16 flex-col justify-between">
@@ -186,12 +219,12 @@ export default function CartModal({ cartItems = [] }: CartModalProps) {
 											/>
 										</div>
 									</div>
-									<a
-										href={"/checkout"}
+									<button
+										onClick={onCheckOut}
 										className="block w-full rounded-full bg-[--default-3] p-3 text-center text-sm font-medium text-white opacity-90 hover:opacity-100"
 									>
 										Proceed to Checkout
-									</a>
+									</button>
 								</div>
 							)}
 						</Dialog.Panel>

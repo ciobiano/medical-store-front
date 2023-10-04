@@ -14,7 +14,7 @@ interface AddToCartProps {
 }
 
 export function AddToCart({ inventory, availableForSale }: AddToCartProps) {
-	const { addItem } = useCart(); 
+	const { addItem } = useCart();
 	const router = useRouter();
 	const [isPending, startTransition] = useTransition();
 

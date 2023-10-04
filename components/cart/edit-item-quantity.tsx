@@ -6,9 +6,6 @@ import useCart from "@/hooks/use-cart"; // Import your useCart hook
 import LoadingDots from "../load-dots";
 import { Inventory } from "@/types";
 
-
-
-
 interface EditItemQuantityButtonProps {
 	item: Inventory;
 	type: "plus" | "minus";
@@ -21,27 +18,27 @@ export default function EditItemQuantityButton({
 	const { removeItem, addItem, updateItemQuantity } = useCart(); // Use your custom useCart hook
 	const router = useRouter();
 	const [isPending, startTransition] = useTransition();
-const handleEditQuantity = () => {
-	startTransition(() => {
-		if (type === "minus") {
-			if (item.quantity && item.quantity > 1) {
-				updateItemQuantity(item.id, item.quantity - 1);
+	const handleEditQuantity = () => {
+		startTransition(() => {
+			if (type === "minus") {
+				if (item.quantity && item.quantity > 1) {
+					updateItemQuantity(item.id, item.quantity - 1);
+				} else {
+					removeItem(item.id);
+				}
 			} else {
-				removeItem(item.id);
+				if (item.quantity) {
+					updateItemQuantity(item.id, item.quantity + 1);
+				} else {
+					addItem({
+						...item, // Spread to include all properties
+						quantity: 1,
+					});
+				}
 			}
-		} else {
-			if (item.quantity) {
-				updateItemQuantity(item.id, item.quantity + 1);
-			} else {
-				addItem({
-					...item, // Spread to include all properties
-					quantity: 1,
-				});
-			}
-		}
-		router.refresh();
-	});
-};
+			router.refresh();
+		});
+	};
 
 	return (
 		<button

@@ -64,12 +64,13 @@ const CategorySection:React.FC<{
 const HomePage = async () => {
 	const [data1, data2] = await Promise.all([
 		fetchCategoryData(
-			"1521804a-0efc-4252-a76c-2079477a0024",
-			"57d69bd1-792b-45e3-b9eb-b121476cb697"
+			"9a3216b3-a7e8-411f-8a2d-650e9b6fca5d",
+
+			"0d151bf0-8dc2-4a86-a6ef-3b8cf3067069"
 		),
 		fetchCategoryData(
-			"93265030-fe89-44f4-8d1a-ee35526caac6",
-			"3fed3acc-ec4b-4235-96f5-1e3cb9709cd1"
+			"2d0151f9-a10b-4ce9-880e-6fe4f7d0315a",
+			"e0274b8e-a6ac-4ad7-af44-323fdc883e99"
 		),
 	]);
 

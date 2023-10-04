@@ -10,7 +10,8 @@ export interface Query {
 	categoryId?: string;
 	manufacturerId?: string;
 	sizeId?: string;
-	isFeatured?: boolean;	
+	isFeatured?: boolean;
+		
 	sortKey?: string; 
 	reverse?: boolean;
 

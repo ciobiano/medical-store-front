@@ -6,8 +6,6 @@ import useCart from "@/hooks/use-cart"; // Import your useCart hook
 import { useTransition } from "react";
 import { Inventory } from "@/types";
 
-
-
 interface DeleteItemButtonProps {
 	item: Inventory;
 }
