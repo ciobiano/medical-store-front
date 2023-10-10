@@ -1,10 +1,7 @@
 
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
-
-
 import { defaultSort, sorting } from "@/lib/constants";
-import getProducts from "@/actions/get-products";
 import { CollectionQuery, getCollectionProducts } from "@/actions/get-collection-product";
 import ProductGridItems from "@/components/product-grid-items";
 import Grid from "@/components/grid";
