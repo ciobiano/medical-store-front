@@ -86,7 +86,7 @@ export default function MobileMenu({ menu }: { menu: Category[] }) {
 											</Link>
 										</li>
 										{menu.map((item: Category) => {
-											const href = `/category/${item.id}`;
+											const href = `/search/${item.id}`;
 											const active = pathname === href;
 											return (
 												<li
