@@ -77,6 +77,14 @@ export default function MobileMenu({ menu }: { menu: Category[] }) {
 								</div>
 								{menu.length ? (
 									<ul className="flex w-full flex-col">
+										<li className="flex ">
+											<Link
+												href={"/search"}
+												className="text-neutral-500 underline-offset-4 hover:text-black hover:underline dark:text-neutral-400 dark:hover:text-neutral-300 py-2 text-xl transition-colors "
+											>
+												All
+											</Link>
+										</li>
 										{menu.map((item: Category) => {
 											const href = `/category/${item.id}`;
 											const active = pathname === href;
