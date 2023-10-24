@@ -54,7 +54,7 @@ const CategorySection:React.FC<{
 			<h2 className="uppercase space-y-4 md:text-lg font-semibold border-b border-gray-600 w-full text-[--default-2] ">
 				{category.name}
 			</h2>
-			<Grid className="grid-cols-1 p-4 sm:grid-cols-2 lg:grid-cols-4">
+			<Grid className="grid-cols-2  sm:grid-cols-2 lg:grid-cols-4">
 				<ProductGridItems products={products} />
 			</Grid>
 		</div>

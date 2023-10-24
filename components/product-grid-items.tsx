@@ -24,6 +24,7 @@ export default function ProductGridItems({
 								title: product.name,
 								amount: product.price,
 								currencyCode: "NGN",
+								
 							}}
 							src={product.images[0]?.url}
 							fill
