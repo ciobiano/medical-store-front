@@ -5,11 +5,10 @@ import clsx from "clsx";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
 
 const FooterMenuItem = ({ item }: { item: Category }) => {
 	const pathname = usePathname();
- 	const href = `/category/${item.id}`;
+	const href = `/search/${item.id}`;
 	const active = pathname === href;
 
 	return (
