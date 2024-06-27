@@ -1,7 +1,7 @@
 import { Inventory } from "@/types"; // Replace with your actual Inventory type import
 import toast from "react-hot-toast";
 import { create } from "zustand";
-import {  persist } from "zustand/middleware";
+import { persist } from "zustand/middleware";
 
 type CartState = {
 	items: Inventory[];
@@ -11,8 +11,6 @@ type CartState = {
 	clearCart: () => void;
 };
 
-
-
 // Guarded localStorage access function
 function createJSONStorage() {
 	const isBrowser = typeof window !== "undefined";
@@ -20,9 +18,9 @@ function createJSONStorage() {
 	if (!isBrowser) {
 		// Provide a fallback if not in a browser environment
 		return {
-			getItem: () => null,  // Fallback methods
+			getItem: () => null, // Fallback methods
 			setItem: () => {},
-			 removeItem: () => {}
+			removeItem: () => {},
 		};
 	}
 
@@ -98,7 +96,6 @@ const useCart = create(
 		{
 			name: "cart-storage", // This is the key under which your state will be stored
 			storage: storage,
-			 
 		}
 	)
 );

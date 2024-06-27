@@ -2,6 +2,7 @@
 import { SortFilterItem } from "@/lib/constants";
 import FilterItemDropdown from "./dropdown";
 import { FilterItem } from "./item";
+import Container from "@/components/ui/container";
 
 export type ListItem = SortFilterItem | PathFilterItem;
 export type PathFilterItem = { name: string; path: string ; title: string};
@@ -24,8 +25,10 @@ export default function FilterList({
 	title?: string;
 }) {
 	return (
-		<>
-			<nav>
+		<Container>
+
+
+			<nav className="">
 				{title ? (
 					<h3 className="hidden text-xs text-neutral-500 md:block">{title}</h3>
 				) : null}
@@ -36,6 +39,6 @@ export default function FilterList({
 					<FilterItemDropdown list={list} />
 				</ul>
 			</nav>
-		</>
+		</Container>
 	);
 }

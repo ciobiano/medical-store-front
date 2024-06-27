@@ -7,6 +7,7 @@ import MobileMenu from "./mobile-nav";
 import { Suspense } from "react";
 import OpenCart from "@/components/cart/open-cart";
 import Cart from "@/components/cart";
+import Container from "@/components/ui/container";
 
 const SITE_NAME = process.env.SITE_NAME;
 
@@ -17,12 +18,14 @@ export default async function Navbar() {
 	const randomFourCategories = shuffle([...categories]).slice(0, 2);
 
 	return (
+		<Container>
+
 		<nav className="relative flex items-center justify-between p-4 lg:px-6">
 			<div className="block flex-none md:hidden">
 				<MobileMenu menu={categories} />
 			</div>
-			<div className="flex w-full items-center">
-				<div className="flex w-full md:w-1/3">
+			<div className="flex w-full items-center justify-between">
+				<div className="flex w-full md:w-1/3 -ml-2">
 					<Link
 						href="/"
 						className="mr-2 flex w-full items-center justify-center md:w-auto lg:mr-6"
@@ -33,7 +36,7 @@ export default async function Navbar() {
 						</div>
 					</Link>
 					{categories.length ? (
-						<ul className="hidden gap-6 text-sm md:flex md:items-center">
+						<ul className="hidden  ml-10 text-sm justify-between w-full max-w-lg md:flex md:items-center ">
 							<li className="flex ">
 								<Link
 									href={"/search"}
@@ -55,7 +58,7 @@ export default async function Navbar() {
 						</ul>
 					) : null}
 				</div>
-				<div className="hidden justify-center md:flex md:w-1/3 ">
+				<div className="hidden justify-end  md:flex md:w-1/3 ">
 					<Search />
 				</div>
 				<div className="flex justify-end md:w-1/3">
@@ -65,5 +68,6 @@ export default async function Navbar() {
 				</div>
 			</div>
 		</nav>
+		</Container>
 	);
 }
