@@ -10,13 +10,17 @@ function mapCategoriesToListItems(categories: Category[]): ListItem[] {
 		...category,
 		path: `/search/${category.id}`, 
 		title: category.name, 
+		
 	}));
 }
 
 
 async function CollectionList() {
 	const collections = await getCategories();
-	const listItems = mapCategoriesToListItems(collections); 
+	console.log("Collections fetched in CollectionList:", collections);
+	
+	const listItems = mapCategoriesToListItems(collections);
+
 	return <FilterList list={listItems} title="Collections" />;
 }
 

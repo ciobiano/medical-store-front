@@ -29,6 +29,7 @@ const fetchCategoryData = async (categoryId: string, billboardId: string) => {
 			getProducts({ categoryId }),
 			getCategory(categoryId),
 		]);
+		
 		return {
 			billboard,
 			products: products.slice(0, 8),
@@ -68,37 +69,41 @@ const HomePage = async () => {
 	try {
 		const [data1, data2] = await Promise.all([
 			fetchCategoryData(
-				"9a3216b3-a7e8-411f-8a2d-650e9b6fca5d",
-				"0d151bf0-8dc2-4a86-a6ef-3b8cf3067069"
+				"ada1dbc4-0c10-49b5-ba6a-faceac2fb3d7",
+				"55166be2-c98e-4db3-8108-eecb7e6b3216"
 			),
 			fetchCategoryData(
-				"2d0151f9-a10b-4ce9-880e-6fe4f7d0315a",
-				"e0274b8e-a6ac-4ad7-af44-323fdc883e99"
+				"44471523-6145-4715-9b82-3431ed2799ee",
+				"fcd762dd-7bb7-484d-bede-5089d44a8c72"
 			),
 		]);
 
 		return (
 			<Container>
 				<div className="space-y-24 pb-10 mt-6">
-					<CategorySection
-						billboardData={data1.billboard}
-						category={{
-							name: data1.category.name,
-							description:
-								"Acid reflux is a common medical condition in which stomach contents leak into the tube connecting the mouth to the stomach.",
-						}}
-						products={data1.products}
-					/>
+					{data1.billboard && data1.category && (
+						<CategorySection
+							billboardData={data1.billboard}
+							category={{
+								name: data1.category.name,
+								description:
+									"Acid reflux is a common medical condition in which stomach contents leak into the tube connecting the mouth to the stomach.",
+							}}
+							products={data1.products}
+						/>
+					)}
 					<GridRow />
-					<CategorySection
-						billboardData={data2.billboard}
-						category={{
-							name: data2.category.name,
-							description:
-								"Depression is a common medical condition that affects how people feel. Everyone experiences occasional times of sadness.",
-						}}
-						products={data2.products}
-					/>
+					{data2.billboard && data2.category && (
+						<CategorySection
+							billboardData={data2.billboard}
+							category={{
+								name: data2.category.name,
+								description:
+									"Depression is a common medical condition that affects how people feel. Everyone experiences occasional times of sadness.",
+							}}
+							products={data2.products}
+						/>
+					)}
 				</div>
 			</Container>
 		);

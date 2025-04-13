@@ -1,33 +1,18 @@
-
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { defaultSort, sorting } from "@/lib/constants";
-import { CollectionQuery, getCollectionProducts } from "@/actions/get-collection-product";
+import getProducts from "@/actions/get-products";
 import ProductGridItems from "@/components/product-grid-items";
 import Grid from "@/components/grid";
 
-export const runtime = "edge";
+export const revalidate = 0;
 
-export async function generateMetadata({
-	params,
-}: {
-	params: { collection: string };
-}): Promise<Metadata> {
-	const collectionQuery: CollectionQuery = { collection: params.collection };
-	const inventories = await getCollectionProducts(collectionQuery);
-
-	if (!inventories || inventories.length === 0) return notFound();
-
-	// Use the first inventory item to generate metadata
-	const firstInventory = inventories[0];
-	const category = firstInventory.category;
-
+export async function generateMetadata(): Promise<Metadata> {
 	return {
-		title: category.name,
-		description: `${category.name} products`,
+		title: "All Products",
+		description: "Browse all available products.",
 	};
 }
-
 
 export default async function CategoryPage({
 	params,
@@ -40,16 +25,19 @@ export default async function CategoryPage({
 	const { sortKey, reverse } =
 		sorting.find((item) => item.slug === sort) || defaultSort;
 
-	const products = await getCollectionProducts({
-		collection: params.collection,
+	const productQuery = {
+		categoryId: params.collection, // Use the ID here
 		sortKey,
 		reverse,
-	});
+		limit: 20, // Or your desired limit
+	};
+	console.log("Query passed to getProducts:", productQuery); // Log the query object
 
+	const products = await getProducts(productQuery);
 	return (
 		<section>
 			{products.length === 0 ? (
-				<p className="py-3 text-lg">{`No products found in this collection`}</p>
+				<p className="py-3 text-lg">{`No products found`}</p>
 			) : (
 				<Grid className="grid-cols-2 sm:grid-cols-2 lg:grid-cols-4">
 					<ProductGridItems products={products} />
