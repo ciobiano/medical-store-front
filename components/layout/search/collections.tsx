@@ -17,7 +17,7 @@ function mapCategoriesToListItems(categories: Category[]): ListItem[] {
 
 async function CollectionList() {
 	const collections = await getCategories();
-	console.log("Collections fetched in CollectionList:", collections);
+
 	
 	const listItems = mapCategoriesToListItems(collections);
 

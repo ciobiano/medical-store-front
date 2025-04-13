@@ -26,12 +26,11 @@ export default async function CategoryPage({
 		sorting.find((item) => item.slug === sort) || defaultSort;
 
 	const productQuery = {
-		categoryId: params.collection, // Use the ID here
+		categoryId: params.collection, 
 		sortKey,
 		reverse,
-		limit: 20, // Or your desired limit
+		limit: 20, 
 	};
-	console.log("Query passed to getProducts:", productQuery); // Log the query object
 
 	const products = await getProducts(productQuery);
 	return (

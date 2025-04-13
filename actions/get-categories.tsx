@@ -3,7 +3,6 @@ import { Category } from "@/types";
 const URL = `${process.env.NEXT_PUBLIC_API_URL}/categories`;
 
 const getCategories = async (): Promise<Category[]> => {
-	console.log(`Fetching categories from: ${URL}`);
 
 			const res = await fetch(URL, { cache: 'no-store' });
 
@@ -16,7 +15,7 @@ const getCategories = async (): Promise<Category[]> => {
 
 	try {
 		const data = await res.json();
-		console.log("Data returned by getCategories:", data);
+		
 		return data;
 	} catch (jsonError) {
 		console.error("Failed to parse categories JSON:", jsonError);
