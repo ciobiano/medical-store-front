@@ -16,6 +16,9 @@ export const getCollectionProducts = async (
 		reverse: query.reverse,
 		// Add any other transformations here
 	};
+	
 
 	return getProducts(transformedQuery);
+
+
 };

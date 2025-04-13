@@ -1,4 +1,3 @@
-
 import { Inventory } from "@/types";
 import qs from "query-string";
 
@@ -11,10 +10,11 @@ export interface Query {
 	manufacturerId?: string;
 	sizeId?: string;
 	isFeatured?: boolean;
-		
-	sortKey?: string; 
-	reverse?: boolean;
 
+	sortKey?: string;
+	reverse?: boolean;
+	limit?: number;
+	skip?: number;
 }
 
 const getProducts = async (query: Query): Promise<Inventory[]> => {
@@ -22,9 +22,6 @@ const getProducts = async (query: Query): Promise<Inventory[]> => {
 		url: URL,
 		query: {
 			...query,
-
-
-			
 		},
 	});
 	const res = await fetch(url);

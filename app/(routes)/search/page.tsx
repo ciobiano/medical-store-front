@@ -5,6 +5,7 @@ import ProductGridItems from "@/components/product-grid-items";
 import { defaultSort, sorting } from "@/lib/constants";
 
 export const runtime = "edge";
+export const revalidate = 0;
 
 export const metadata = {
 	title: "All available products",
