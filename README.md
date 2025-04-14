@@ -58,7 +58,7 @@ The goal of this project is to provide a fast, responsive, and user-friendly onl
 - **State Management:** React Hooks (useState, useContext, useReducer), potentially React Context API.
 - **Authentication Integration:** Relies on backend (`medstore-admin`) which likely uses Clerk.
 - **UI Components:** Built using standard React components, potentially enhanced by libraries like `clsx` for conditional classes.
-- **Deployment:** [Vercel](https://vercel.com/) (Assumed)
+- **Deployment:** [Vercel](https://vercel.com/) 
 
 ---
 
